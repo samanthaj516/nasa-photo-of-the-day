@@ -1,37 +1,31 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";git 
-import axios from "axios";
+import React from "react";
+import "../App.css";
+import styled from 'styled-components';
 
-function Photo() {
-    const [picture, setPicture] = useState([]);
-  
-    useEffect(() => {
-      const info = axios
-      .get('https://api.nasa.gov/planetary/apod?api_key=ZrZ65g5YPadjo7KvnT1dXIKSGZuc2Y2Bq9EMsrrL&date=1995-06-16')
-      .then((res) => {
-        console.log(res)
-        setPicture(res.data)
-      })
-      .catch(err => {
-        console.log("No Image Found", err)
-        console.log(info)
-      })
-    }, [])
-  
+const StyledPhoto = styled.div`
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  body {
+    background: black;
+    color: white;
+    margin-bottom: 5rem;
+  }  
+  img {
+    width: 100%;
+    height: auto;
+  }
+`;
+
+const Photo = (props) => {
+
     return(
-      <div className="Photo">
-        <Photo 
-        key={picture.id}
-        date={picture.date}
-        explanation={picture.explanation}
-        title={picture.title}
-        url={picture.url}
-        copyright={picture.copyright}
-        />  
-    </div>
+      <StyledPhoto className="Photo">
+        <h2>{props.title}</h2>
+        <img src={props.url} alt="NASA APOD" />
+    </StyledPhoto>
     );
 }
-
-
-
 export default Photo;
